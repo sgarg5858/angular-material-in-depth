@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use './styles/brand-palettes' as brand;
+@include mat.core();
+
+$brand-primary : mat.define-palette(brand.$brand-blue-palette);
+$brand-accent: mat.define-palette(brand.$brand-yellow-palette);
+$brand-warn: mat.define-palette(mat.$red-palette);
+
+$brand-theme : mat.define-light-theme((
+    color:(
+        primary: $brand-primary,
+        accent: $brand-accent,
+        warn: $brand-warn
+    ),
+    typography: mat.define-typography-config(
+        $font-family:'Open Sans',
+        $body-1: mat.define-typography-level(
+            $font-size:16px,
+            $line-height:24px
+        ),
+        $headline-6: mat.define-typography-level(
+            $font-size:24px,
+            $line-height:36px,
+            $font-weight:700
+        )
+    )
+));
+
+$merged-brand-theme: map.deep-merge($brand-theme,(
+    color:(
+        foreground:(
+            elevation: #1976d2,
+        )
+    )
+));
+
+
+@include mat.all-component-themes($merged-brand-theme);
+@include mat.typography-hierarchy($merged-brand-theme);
+.content{
+    @include mat.overridable-elevation(24,black);
+    @include mat.elevation-transition(1s);
+    &:hover{
+        @include mat.overridable-elevation(4,black)
+    }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Open Sans', sans-serif; }
+
+
