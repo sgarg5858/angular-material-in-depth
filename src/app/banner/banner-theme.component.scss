@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+// Part of mdc library! Angular material uses it
+@use '@material/density' as density;
+@mixin color($color-config){
+    $primary-color:mat.get-color-from-palette($color-config,primary);
+    $accent-color:mat.get-color-from-palette($color-config,accent);
+
+    // this apply styles
+    app-banner{
+        .header{
+            background-color: mat.get-color-from-palette($primary-color);
+            color: mat.get-color-from-palette($primary-color,default-contrast);
+        }
+        .content{
+            background-color: mat.get-color-from-palette($primary-color,50);
+            color: mat.get-color-from-palette($primary-color,50-contrast);
+
+        }
+    }
+}
+
+@mixin typography($typography-config){
+
+    // this apply styles
+    app-banner{
+        .header h2{
+            // font-size: mat.font-size($typography-config,headline-6);
+            // font-size: mat.font-family($typography-config);
+            @include mat.typography-level($typography-config,headline-6);
+        }
+        .content p{
+            @include mat.typography-level($typography-config,body-1);
+        }
+    }
+}
+
+@mixin density($density-scale){
+
+    $density-config:(
+        height: (
+            default:150px,
+            minimum:120px,
+            maximum:200px
+        )
+    );
+    // this apply styles
+    app-banner{
+        height: density.prop-value($density-config,$density-scale,height) ;
+    }
+}
+
+@mixin theme($theme-config){
+
+    $color-config: mat.get-color-config($theme-config);
+
+    $typography-config: mat.get-typography-config($theme-config);
+
+    $density-config: mat.get-density-config($theme-config);
+
+    @if $color-config != null 
+    {
+    @include color($color-config);
+    }
+    @if $typography-config != null 
+    {
+    @include typography($typography-config);
+    }
+    @if $density-config != null 
+    {
+    @include density($density-config);
+    }
+}

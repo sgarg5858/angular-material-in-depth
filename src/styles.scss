@@ -3,6 +3,7 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @use './styles/brand-palettes' as brand;
+@use './app/banner/banner-theme.component' as banner;
 @include mat.core();
 
 $brand-primary : mat.define-palette(brand.$brand-blue-palette);
@@ -26,7 +27,8 @@ $brand-theme : mat.define-light-theme((
             $line-height:36px,
             $font-weight:700
         )
-    )
+    ),
+    density: maximum
 ));
 
 $merged-brand-theme: map.deep-merge($brand-theme,(
@@ -36,10 +38,11 @@ $merged-brand-theme: map.deep-merge($brand-theme,(
         )
     )
 ));
-
+@debug $merged-brand-theme;
 
 @include mat.all-component-themes($merged-brand-theme);
 @include mat.typography-hierarchy($merged-brand-theme);
+@include banner.theme($merged-brand-theme);
 .content{
     @include mat.overridable-elevation(24,black);
     @include mat.elevation-transition(1s);

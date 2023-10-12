@@ -1,0 +1,26 @@
+:host {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+    display: flex;
+    max-width: 600px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    flex-direction: column;
+  }
+  h2, p {
+    margin: 0;
+  }
+  .header {
+    flex: 1 1 35%;
+  }
+  .content {
+    flex: 1 1 65%;
+  }
+  .header, .content {
+    display: flex;
+    align-items: center;
+    padding: 7px 15px;
+  }
