@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @use '../app/banner/banner-theme.component.scss' as banner;
+@use '../app/app.theme-component.scss' as app-root;
 
 @function with-typography-config($color-config)
 {
@@ -39,6 +40,7 @@
 @include mat.select-theme($theme-config);
 @include mat.typography-hierarchy($theme-config);
 //Custom Components
+@include app-root.theme($theme-config);
 @include banner.theme($theme-config);
 
 }

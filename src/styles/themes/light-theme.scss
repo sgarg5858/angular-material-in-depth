@@ -22,7 +22,7 @@ $brand-light-theme: mat.define-light-theme(utils.with-typography-config($light-t
 
 $overridden-brand-light-theme: utils.override-colors($brand-light-theme,$overriding-light-theme-color-config);
 
-@mixin apply-theme()
-{
+// @mixin apply-theme()
+// {
     @include utils.create-theme-bundle($overridden-brand-light-theme);
-}
+// }

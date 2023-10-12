@@ -2,10 +2,9 @@
 
 @use '@angular/material' as mat;
 @use 'sass:map';
-@use './styles/themes/light-theme' as light-theme;
+
 
 @include mat.core();
-@include light-theme.apply-theme();
 
 
 html, body { height: 100%; }

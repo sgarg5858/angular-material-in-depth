@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@use '../brand-palettes' as brand;
+@use '../utils' as utils;
+
+$brand-dark-primary : mat.define-palette(brand.$brand-blue-palette);
+$brand-dark-accent: mat.define-palette(brand.$brand-yellow-palette);
+$brand-dark-warn: mat.define-palette(mat.$red-palette);
+
+$dark-theme-color-config:(
+    primary:$brand-dark-primary,
+    accent:$brand-dark-accent,
+    warn:$brand-dark-warn
+);
+
+$overriding-dark-theme-color-config:(
+        
+);
+
+$brand-dark-theme: mat.define-dark-theme(utils.with-typography-config($dark-theme-color-config));
+
+$overridden-brand-dark-theme: utils.override-colors($brand-dark-theme,$overriding-dark-theme-color-config);
+
+// @mixin apply-theme()
+// {
+    @include utils.create-theme-bundle($overridden-brand-dark-theme);
+// }

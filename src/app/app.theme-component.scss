@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+// Part of mdc library! Angular material uses it
+@use '@material/density' as density;
+
+@mixin color($color-config){
+    $background:mat.get-color-from-palette($color-config,background);
+
+    // this apply styles
+    app-root{
+        .content{
+            background-color: mat.get-color-from-palette($background,background);
+        }
+    }
+}
+
+
+@mixin theme($theme-config){
+
+    $color-config: mat.get-color-config($theme-config);
+    @if $color-config != null 
+    {
+    @include color($color-config);
+    }
+}
