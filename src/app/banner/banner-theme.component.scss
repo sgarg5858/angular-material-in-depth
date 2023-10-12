@@ -1,21 +1,32 @@
 @use '@angular/material' as mat;
 // Part of mdc library! Angular material uses it
 @use '@material/density' as density;
+
+@mixin _apply-banner-color($color) {
+    .header {
+      background-color: mat.get-color-from-palette($color, default);
+      color: mat.get-color-from-palette($color, default-contrast);
+    }
+    .content {
+      background-color: mat.get-color-from-palette($color, 100);
+      color: mat.get-color-from-palette($color, "100-contrast");
+    }
+  }
+
 @mixin color($color-config){
     $primary-color:mat.get-color-from-palette($color-config,primary);
     $accent-color:mat.get-color-from-palette($color-config,accent);
+    $warn-color:mat.get-color-from-palette($color-config,warn);
 
     // this apply styles
-    app-banner{
-        .header{
-            background-color: mat.get-color-from-palette($primary-color);
-            color: mat.get-color-from-palette($primary-color,default-contrast);
-        }
-        .content{
-            background-color: mat.get-color-from-palette($primary-color,50);
-            color: mat.get-color-from-palette($primary-color,50-contrast);
-
-        }
+    app-banner.primary-banner{
+       @include _apply-banner-color($primary-color);
+    }
+    app-banner.accent-banner{
+        @include _apply-banner-color($accent-color);
+    }
+    app-banner.warn-banner{
+       @include _apply-banner-color($warn-color);
     }
 }
 
