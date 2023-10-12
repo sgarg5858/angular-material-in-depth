@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@use '../brand-palettes' as brand;
+@use '../utils' as utils;
+
+$brand-light-primary : mat.define-palette(brand.$brand-blue-palette);
+$brand-light-accent: mat.define-palette(brand.$brand-yellow-palette);
+$brand-light-warn: mat.define-palette(mat.$red-palette);
+
+$light-theme-color-config:(
+    primary:$brand-light-primary,
+    accent:$brand-light-accent,
+    warn:$brand-light-warn
+);
+
+$overriding-light-theme-color-config:(
+        foreground:(
+            elevation: #1976d2,
+        )
+);
+
+$brand-light-theme: mat.define-light-theme(utils.with-typography-config($light-theme-color-config));
+
+$overridden-brand-light-theme: utils.override-colors($brand-light-theme,$overriding-light-theme-color-config);
+
+@mixin apply-theme()
+{
+    @include utils.create-theme-bundle($overridden-brand-light-theme);
+}

@@ -3,6 +3,10 @@
 @use '@material/density' as density;
 
 @mixin _apply-banner-color($color) {
+    //Parent Selector
+    &{
+        @include mat.overridable-elevation(24,mat.get-color-from-palette($color, 900))
+    }
     .header {
       background-color: mat.get-color-from-palette($color, default);
       color: mat.get-color-from-palette($color, default-contrast);

@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use '../app/banner/banner-theme.component.scss' as banner;
+
+@function with-typography-config($color-config)
+{
+    @return (
+        color: $color-config,
+        typography: mat.define-typography-config(
+            $font-family:'Open Sans',
+            $body-1: mat.define-typography-level(
+                $font-size:16px,
+                $line-height:24px
+            ),
+            $headline-6: mat.define-typography-level(
+                $font-size:24px,
+                $line-height:36px,
+                $font-weight:700
+            )
+        ),
+        density: -1
+    )
+};
+
+@function override-colors($theme,$overiding-colors-map:()){
+    @return map.deep-merge($theme,(
+        color: $overiding-colors-map
+    ))
+};
+
+@mixin create-theme-bundle($theme-config){
+
+@include mat.core-theme($theme-config);
+@include mat.card-theme($theme-config);
+@include mat.form-field-theme($theme-config);
+@include mat.toolbar-theme($theme-config);
+@include mat.button-theme($theme-config);
+@include mat.icon-button-theme($theme-config);
+@include mat.select-theme($theme-config);
+@include mat.typography-hierarchy($theme-config);
+//Custom Components
+@include banner.theme($theme-config);
+
+}
