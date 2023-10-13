@@ -16,8 +16,8 @@
 
 <main class="content ">
 
-  <button mat-button (click)="switchTheme('light')">Light</button>
-  <button mat-button (click)="switchTheme('dark')">Dark</button>
+  <mat-slide-toggle (change)="switchTheme($event)" [checked]="darkMode$|async">Dark Mode</mat-slide-toggle>
+
   
 
   <button mat-raised-button color="accent" class="demo-button">Simple Demo Button</button>

@@ -38,6 +38,8 @@
 @include mat.button-theme($theme-config);
 @include mat.icon-button-theme($theme-config);
 @include mat.select-theme($theme-config);
+@include mat.slide-toggle-theme($theme-config);
+
 @include mat.typography-hierarchy($theme-config);
 //Custom Components
 @include app-root.theme($theme-config);

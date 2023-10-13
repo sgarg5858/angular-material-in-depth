@@ -10,7 +10,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { BannerComponent } from './banner/banner.component';
 import { Theme, ThemeManager } from './core/theme-manager.service';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { map } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,19 +21,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     RouterOutlet,
     MatToolbarModule,MatIconModule,MatButtonModule,MatCardModule,MatSelectModule,MatFormFieldModule,
-    BannerComponent,FormsModule
+    BannerComponent,FormsModule,MatSlideToggleModule
   ]
 })
 export class AppComponent implements OnInit{
   title = 'angular-styling-with-scss';
   themeManager = inject(ThemeManager);
+  darkMode$ = this.themeManager.theme$.pipe(
+    map((theme)=>theme === 'dark')
+  )
 
   ngOnInit(): void {
       this.themeManager.theme$.subscribe();
   }
 
-  switchTheme(theme:Theme)
+  switchTheme(event:MatSlideToggleChange)
   {
-    this.themeManager.switchTheme(theme);
+    this.themeManager.switchTheme(event.checked?'dark':'light');
   }
 }
