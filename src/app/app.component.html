@@ -16,20 +16,8 @@
 
 <main class="content ">
 
-  <mat-form-field>
-    <mat-label>Choose theme</mat-label>
-    <mat-select >
-      <mat-option value="light">Light</mat-option>
-      <mat-option value="dark">Dark</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="theme-picker">
-    <mat-label>Choose theme</mat-label>
-    <mat-select value="themeManager.theme$ | async">
-      <mat-option value="light">Light</mat-option>
-      <mat-option value="dark">Dark</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <button mat-button (click)="switchTheme('light')">Light</button>
+  <button mat-button (click)="switchTheme('dark')">Dark</button>
   
 
   <button mat-raised-button color="accent" class="demo-button">Simple Demo Button</button>

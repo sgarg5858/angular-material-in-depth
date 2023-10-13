@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, map, shareReplay, startWith, take, tap } from 'rxjs';
+import { BehaviorSubject, fromEvent, map, merge, shareReplay, startWith, take, tap } from 'rxjs';
 
 export type Theme = 'light' | 'dark';
 export type ThemeUrl = `${Theme}-theme.css`;
@@ -10,15 +10,25 @@ export class ThemeManager {
 
   //Detect which theme user currently prefers!
   #preferenceQuery=matchMedia(`(prefers-color-scheme:light)`);
-  
-  theme$=fromEvent<MediaQueryList>(this.#preferenceQuery,'change').pipe(
+  #themeSwitcher= new BehaviorSubject<Theme>(resolvedPrefferedTheme(this.#preferenceQuery));
+  #userEnvThemePreference =fromEvent<MediaQueryList>(this.#preferenceQuery,'change').pipe(
     startWith(this.#preferenceQuery),
-    map(resolvedPrefferedTheme),
+    map(resolvedPrefferedTheme));
+
+  theme$= merge(
+    this.#userEnvThemePreference,
+    this.#themeSwitcher
+  ).pipe(
     tap((theme)=>{
       loadTheme(getThemeLinkElement(),theme);
     }),
     shareReplay()
   );
+
+  switchTheme(theme:Theme)
+  {
+    this.#themeSwitcher.next(theme);
+  }
 
   //listen to preference changes
   //Sync it with select element on page
