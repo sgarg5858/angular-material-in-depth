@@ -17,7 +17,9 @@
 <main class="content ">
 
   <mat-slide-toggle (change)="switchTheme($event)" [checked]="darkMode$|async">Dark Mode</mat-slide-toggle>
-
+  <button mat-stroked-button
+  (click)="themeManager.removeThemeFromLocalStorage()"
+  >Reset Theme</button>
   
 
   <button mat-raised-button color="accent" class="demo-button">Simple Demo Button</button>

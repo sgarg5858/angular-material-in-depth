@@ -8,7 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { BannerComponent } from './banner/banner.component';
-import { Theme, ThemeManager } from './core/theme-manager.service';
+import { ThemeManager } from './core/theme-manager.service';
 import { FormsModule } from '@angular/forms';
 import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { map } from 'rxjs';

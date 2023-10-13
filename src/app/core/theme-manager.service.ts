@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, fromEvent, map, merge, shareReplay, startWith, take, tap } from 'rxjs';
+import { BehaviorSubject, Subject, fromEvent, map, merge, shareReplay, startWith, take, tap } from 'rxjs';
 
 export type Theme = 'light' | 'dark';
 export type ThemeUrl = `${Theme}-theme.css`;
@@ -10,7 +10,8 @@ export class ThemeManager {
 
   //Detect which theme user currently prefers!
   #preferenceQuery=matchMedia(`(prefers-color-scheme:light)`);
-  #themeSwitcher= new BehaviorSubject<Theme>(resolvedPrefferedTheme(this.#preferenceQuery));
+  #themeSwitcher= new Subject<Theme>();
+
   #userEnvThemePreference =fromEvent<MediaQueryList>(this.#preferenceQuery,'change').pipe(
     startWith(this.#preferenceQuery),
     map(resolvedPrefferedTheme));
@@ -27,8 +28,16 @@ export class ThemeManager {
 
   switchTheme(theme:Theme)
   {
+    localStorage.setItem('theme',theme);
     this.#themeSwitcher.next(theme);
   }
+  //TO reset theme
+  removeThemeFromLocalStorage()
+  {
+    localStorage.removeItem('theme');
+    this.#themeSwitcher.next(resolvedPrefferedTheme(this.#preferenceQuery));
+  }
+
 
   //listen to preference changes
   //Sync it with select element on page
@@ -40,6 +49,11 @@ export class ThemeManager {
 
 function resolvedPrefferedTheme(query:MediaQueryList): Theme
 {
+  const prefferedTheme = localStorage.getItem('theme');
+  if(prefferedTheme)
+  {
+    return prefferedTheme as Theme;
+  }
   console.log(query);
   return query.matches ? 'light': 'dark';
 }
