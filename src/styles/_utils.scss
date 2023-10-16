@@ -45,4 +45,11 @@
 @include app-root.theme($theme-config);
 @include banner.theme($theme-config);
 
+.purple-sub-theme{
+    $purple-sub-theme: override-colors($theme-config,(
+        primary:mat.define-palette(mat.$deep-purple-palette),
+        accent:mat.define-palette(mat.$pink-palette),
+    ));
+    @include mat.button-color($purple-sub-theme);
+}
 }
