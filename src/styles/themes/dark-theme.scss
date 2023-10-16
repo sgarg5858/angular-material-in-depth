@@ -9,11 +9,11 @@ $brand-dark-warn: mat.define-palette(mat.$red-palette);
 $dark-theme-color-config:(
     primary:$brand-dark-primary,
     accent:$brand-dark-accent,
-    warn:$brand-dark-warn
+    warn:$brand-dark-warn,
 );
 
 $overriding-dark-theme-color-config:(
-        
+    success:mat.define-palette(mat.$green-palette)
 );
 
 $brand-dark-theme: mat.define-dark-theme(utils.with-typography-config($dark-theme-color-config));

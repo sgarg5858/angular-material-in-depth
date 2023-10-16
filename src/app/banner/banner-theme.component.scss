@@ -21,6 +21,7 @@
     $primary-color:mat.get-color-from-palette($color-config,primary);
     $accent-color:mat.get-color-from-palette($color-config,accent);
     $warn-color:mat.get-color-from-palette($color-config,warn);
+    $success-color:mat.get-color-from-palette($color-config,success);
 
     // this apply styles
     app-banner.primary-banner{
@@ -31,6 +32,11 @@
     }
     app-banner.warn-banner{
        @include _apply-banner-color($warn-color);
+    }
+    @if $success-color!=null {
+        app-banner.success-banner{
+            @include _apply-banner-color($success-color);
+         }
     }
 }
 
